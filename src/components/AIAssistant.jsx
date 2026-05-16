@@ -4,12 +4,12 @@ import { getAIResponse } from '../services/aiEngine';
 import { Send, Trash2, Zap } from 'lucide-react';
 
 const suggestions = [
-  'Find me the best supplier for electronics',
+  'Show me the latest waste and spoilage analysis',
+  'What is our warehouse capacity and utilization?',
+  'Perform ABC inventory classification',
   'What is the current demand forecast?',
-  'Which inventory items need reordering?',
-  'Show me shipment risk analysis',
+  'Provide an executive KPI overview',
   'How can I optimize our supply chain spend?',
-  'What are the current supply chain risks?',
 ];
 
 export default function AIAssistant({ context = {} }) {

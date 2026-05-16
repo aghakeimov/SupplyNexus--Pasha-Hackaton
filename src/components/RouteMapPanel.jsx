@@ -88,7 +88,7 @@ export default function RouteMapPanel() {
   const [filterZone, setFilterZone]   = useState('ALL');
 
   const zones = ['ALL', 'A', 'B', 'C', 'D', 'E', 'F'];
-  const zoneNames = { ALL:'Hamısı', A:'Mərkəz', B:'Şimal-Qərb', C:'Şərq', D:'Uzaq / Şimal', E:'Abşeron', F:'Sumqayıt' };
+  const zoneNames = { ALL:'All', A:'Central', B:'North-West', C:'East', D:'Far / North', E:'Absheron', F:'Sumgait' };
 
   const visibleMarkets = BRAVO_MARKETS.filter(m => filterZone === 'ALL' || m.zone === filterZone);
 
@@ -127,7 +127,7 @@ export default function RouteMapPanel() {
         orderedMarkets,
       });
     } catch (e) {
-      setError(`OSRM serverinə qoşulmaq alınmadı: ${e.message}`);
+      setError(`Failed to connect to OSRM server: ${e.message}`);
     } finally {
       setCalculating(false);
     }
@@ -158,10 +158,10 @@ export default function RouteMapPanel() {
             <Navigation size={18} color="var(--green)" />
           </div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: 15 }}>Optimal Marşrut Planlaşdırması</div>
+            <div style={{ fontWeight: 700, fontSize: 15 }}>Optimal Route Planning</div>
             <div style={{ fontSize: 12, color: 'var(--text3)' }}>
               <Wifi size={10} style={{ marginRight: 4, verticalAlign: 'middle' }} />
-              Real yollar üzrə — OSRM Navigator Motoru (OpenStreetMap)
+              Real roads — OSRM Navigator Engine (OpenStreetMap)
             </div>
           </div>
         </div>
@@ -178,15 +178,15 @@ export default function RouteMapPanel() {
                   width: 14, height: 14, border: '2px solid rgba(255,255,255,0.3)',
                   borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 0.8s linear infinite',
                 }} />
-                Yol tapılır...
+                Finding route...
               </>
             ) : (
-              <><Zap size={14} /> AI Navigator Marşrut</>
+              <><Zap size={14} /> AI Navigator Route</>
             )}
           </button>
           {routeResult && (
             <button className="btn btn-ghost" onClick={() => { setRouteResult(null); setError(null); }}>
-              <RefreshCw size={14} /> Sıfırla
+              <RefreshCw size={14} /> Reset
             </button>
           )}
         </div>
@@ -211,10 +211,10 @@ export default function RouteMapPanel() {
           background: 'linear-gradient(135deg,rgba(0,166,81,0.09),rgba(200,16,46,0.05))',
         }}>
           {[
-            { icon: <Navigation size={14}/>, label: 'Real Yol Məsafəsi', value: `${routeResult.distKm} km`,       color: 'var(--green)' },
-            { icon: <Clock size={14}/>,      label: 'Sürücülük Vaxtı',   value: `${routeResult.durHr} saat`,      color: '#3b82f6' },
-            { icon: <MapPin size={14}/>,     label: 'Market Sayı',        value: `${routeResult.stops} dayanacaq`, color: '#eab308' },
-            { icon: <Truck size={14}/>,      label: 'Yanacaq Xərci',      value: `$${routeResult.fuelCost}`,       color: '#f97316' },
+            { icon: <Navigation size={14}/>, label: 'Real Road Distance', value: `${routeResult.distKm} km`,       color: 'var(--green)' },
+            { icon: <Clock size={14}/>,      label: 'Driving Time',   value: `${routeResult.durHr} hrs`,      color: '#3b82f6' },
+            { icon: <MapPin size={14}/>,     label: 'Market Count',        value: `${routeResult.stops} stops`, color: '#eab308' },
+            { icon: <Truck size={14}/>,      label: 'Fuel Cost',      value: `$${routeResult.fuelCost}`,       color: '#f97316' },
           ].map((item, i) => (
             <div key={i} style={{
               padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10,
@@ -247,7 +247,7 @@ export default function RouteMapPanel() {
           {/* Zone filter pills */}
           <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
             <div style={{ fontSize: 10, color: 'var(--text3)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: 6 }}>
-              Zona Filtri
+              Zone Filter
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
               {zones.map(z => (
@@ -258,7 +258,7 @@ export default function RouteMapPanel() {
                   color: filterZone===z ? (ZONE_COLORS[z]||'var(--green)') : 'var(--text2)',
                   transition: 'all 0.15s',
                 }}>
-                  {z==='ALL' ? 'Hamısı' : `${z}`}
+                  {z==='ALL' ? 'All' : `${z}`}
                 </button>
               ))}
             </div>
@@ -270,10 +270,10 @@ export default function RouteMapPanel() {
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0,
           }}>
             <span style={{ fontSize: 12, color: 'var(--text2)' }}>
-              {visibleMarkets.filter(m => selectedMarkets.has(m.id)).length}/{visibleMarkets.length} seçilib
+              {visibleMarkets.filter(m => selectedMarkets.has(m.id)).length}/{visibleMarkets.length} selected
             </span>
             <button className="btn btn-ghost btn-sm" onClick={toggleZoneAll} style={{ fontSize: 11, padding: '3px 8px' }}>
-              {visibleMarkets.every(m => selectedMarkets.has(m.id)) ? 'Çıxar' : 'Hamısını seç'}
+              {visibleMarkets.every(m => selectedMarkets.has(m.id)) ? 'Deselect' : 'Select All'}
             </button>
           </div>
 
@@ -308,7 +308,7 @@ export default function RouteMapPanel() {
                     <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {m.name}
                     </div>
-                    <div style={{ fontSize: 10, color: 'var(--text3)' }}>{m.district} · Zona {m.zone}</div>
+                    <div style={{ fontSize: 10, color: 'var(--text3)' }}>{m.district} · Zone {m.zone}</div>
                   </div>
                   {routeIdx && (
                     <div style={{
@@ -348,7 +348,7 @@ export default function RouteMapPanel() {
                 <div style={{ fontFamily:'Inter,sans-serif', minWidth:180 }}>
                   <div style={{ fontWeight:700, color:'#C8102E', marginBottom:4 }}>🏭 {WAREHOUSE.name}</div>
                   <div style={{ fontSize:11, color:'#666' }}>{WAREHOUSE.address}</div>
-                  {routeResult && <div style={{ marginTop:6, fontSize:11, color:'#00A651', fontWeight:600 }}>✅ Marşrut başlangıc nöqtəsi</div>}
+                  {routeResult && <div style={{ marginTop:6, fontSize:11, color:'#00A651', fontWeight:600 }}>✅ Route starting point</div>}
                 </div>
               </Popup>
             </Marker>
@@ -369,8 +369,8 @@ export default function RouteMapPanel() {
                         <strong style={{ fontSize:13 }}>{m.name}</strong>
                       </div>
                       <div style={{ fontSize:11, color:'#666', marginBottom:3 }}>{m.address}</div>
-                      <div style={{ fontSize:11, color:'#888' }}>Zona {m.zone} · {m.district}</div>
-                      {idx && <div style={{ marginTop:6, fontSize:12, fontWeight:700, color: ZONE_COLORS[m.zone] }}>#{idx}. dayanacaq</div>}
+                      <div style={{ fontSize:11, color:'#888' }}>Zone {m.zone} · {m.district}</div>
+                      {idx && <div style={{ marginTop:6, fontSize:12, fontWeight:700, color: ZONE_COLORS[m.zone] }}>#{idx}. stop</div>}
                     </div>
                   </Popup>
                 </Marker>
@@ -394,9 +394,9 @@ export default function RouteMapPanel() {
                 <Navigation size={30} color="var(--green)" className="pulse" />
               </div>
               <div style={{ textAlign:'center' }}>
-                <div style={{ fontWeight:700, fontSize:16, marginBottom:6 }}>Real Yollar Üzrə Marşrut Hesablanır</div>
+                <div style={{ fontWeight:700, fontSize:16, marginBottom:6 }}>Calculating Route via Real Roads</div>
                 <div style={{ fontSize:12, color:'var(--text3)' }}>
-                  {selectedMarkets.size} Bravo Market üçün OSRM-dən yol məlumatı alınır...
+                  Fetching road data from OSRM for {selectedMarkets.size} Bravo Markets...
                 </div>
                 <div style={{ fontSize:11, color:'var(--text3)', marginTop:4 }}>
                   (Azerbaijan road network • OpenStreetMap data)
@@ -414,7 +414,7 @@ export default function RouteMapPanel() {
             background:'rgba(13,15,20,0.92)', border:'1px solid var(--border)',
             borderRadius:10, padding:'10px 14px', backdropFilter:'blur(8px)',
           }}>
-            <div style={{ fontSize:10, fontWeight:700, color:'var(--text3)', marginBottom:6, textTransform:'uppercase', letterSpacing:'.06em' }}>Zona</div>
+            <div style={{ fontSize:10, fontWeight:700, color:'var(--text3)', marginBottom:6, textTransform:'uppercase', letterSpacing:'.06em' }}>Zone</div>
             {Object.entries(ZONE_COLORS).map(([z, color]) => (
               <div key={z} style={{ display:'flex', alignItems:'center', gap:6, marginBottom:3 }}>
                 <div style={{ width:8, height:8, borderRadius:'50%', background:color, flexShrink:0 }} />
@@ -424,7 +424,7 @@ export default function RouteMapPanel() {
             {routeResult && (
               <div style={{ marginTop:6, paddingTop:6, borderTop:'1px solid var(--border)', fontSize:11, color:'var(--green)', display:'flex', alignItems:'center', gap:4 }}>
                 <div style={{ width:18, height:3, background:'var(--green)', borderRadius:2 }}/>
-                Real yol marşrutu
+                Real road route
               </div>
             )}
           </div>
@@ -441,7 +441,7 @@ export default function RouteMapPanel() {
           }}>
             <span style={{ fontWeight:600, fontSize:13 }}>
               <Truck size={13} style={{ marginRight:6, verticalAlign:'middle' }} />
-              Çatdırılma Sırası (real yol üzrə) — {routeResult.stops} dayanacaq · {routeResult.distKm} km · {routeResult.durHr} saat
+              Delivery Order (real road) — {routeResult.stops} stops · {routeResult.distKm} km · {routeResult.durHr} hrs
             </span>
             {showList ? <ChevronUp size={14}/> : <ChevronDown size={14}/>}
           </button>

@@ -184,7 +184,7 @@ export default function Logistics() {
             }}
           >
             <Navigation size={14} />
-            Optimal Marşrut
+            Optimal Route
           </button>
           <button className="btn btn-primary" onClick={() => setModal('new')}><Plus size={14} /> New Shipment</button>
         </div>
@@ -232,7 +232,7 @@ export default function Logistics() {
                 width: 32, height: 32, border: '3px solid var(--border)',
                 borderTopColor: 'var(--green)', borderRadius: '50%',
               }} />
-              <span style={{ fontSize: 13 }}>Xəritə yüklənir…</span>
+              <span style={{ fontSize: 13 }}>Loading map…</span>
             </div>
           }>
             <RouteMapPanel />

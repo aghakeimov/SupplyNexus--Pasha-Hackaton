@@ -1,15 +1,15 @@
 import React from 'react';
 import AIAssistant from '../components/AIAssistant';
 import { useStore } from '../store/StoreContext';
-import { Zap, Package, Truck, Users, ShoppingCart, BarChart3, MessageSquare } from 'lucide-react';
+import { Zap, Package, Truck, Users, ShoppingCart, BarChart3, AlertTriangle, LayoutDashboard, Box } from 'lucide-react';
 
 const useCases = [
-  { icon: Users, title: 'Supplier Discovery', desc: 'Find qualified suppliers by category, country or performance score', prompt: 'Find me the best supplier for electronics in Azerbaijan' },
-  { icon: Package, title: 'Demand Forecasting', desc: 'Predict reorder needs and market demand by region', prompt: 'What is the demand forecast for the next quarter?' },
-  { icon: Package, title: 'Inventory Intelligence', desc: 'Real-time stock health analysis and reorder alerts', prompt: 'Which inventory items are running critically low?' },
+  { icon: LayoutDashboard, title: 'Executive KPI Overview', desc: 'Get a high-level summary of your entire supply chain performance', prompt: 'Provide an executive KPI overview' },
+  { icon: AlertTriangle, title: 'Waste & Spoilage', desc: 'Analyze product loss and identify areas for process improvement', prompt: 'Show me the latest waste and spoilage analysis' },
+  { icon: Box, title: 'Warehouse Analytics', desc: 'Check storage capacity, utilization, and stock movements', prompt: 'What is our warehouse capacity and utilization?' },
+  { icon: Package, title: 'ABC Classification', desc: 'Classify inventory items based on revenue contribution', prompt: 'Perform ABC inventory classification' },
   { icon: Truck, title: 'Logistics Analysis', desc: 'Shipment risk assessment and carrier performance', prompt: 'Show me current shipment risks and delays' },
   { icon: BarChart3, title: 'Spend Optimization', desc: 'Cost-saving recommendations and budget insights', prompt: 'How can we optimize our supply chain spend?' },
-  { icon: ShoppingCart, title: 'Procurement Review', desc: 'Purchase order analysis and approval recommendations', prompt: 'Analyze our open purchase orders and pending approvals' },
 ];
 
 export default function AssistantPage() {

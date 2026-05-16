@@ -49,7 +49,7 @@ export const WASTE_DATA = {
 
 // Generate Bravo-specific sales history using real reception data
 const months = Object.keys(MONTHLY_RECEPTIONS);
-const regions = ['Bakı Mərkəz', 'Yasamal-Binəqədi', 'Xətai-Nizami', 'Sabunçu-Suraxanı', 'Abşeron', 'Sumqayıt'];
+const regions = ['Baku Central', 'Yasamal-Binagadi', 'Khatai-Nizami', 'Sabunchu-Surakhani', 'Absheron', 'Sumgait'];
 const regionWeights = [0.30, 0.18, 0.15, 0.17, 0.10, 0.10];
 const catWeights = [0.12, 0.08, 0.09, 0.10, 0.11, 0.07, 0.05, 0.04, 0.06, 0.04, 0.03, 0.02, 0.04, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.03];
 
@@ -78,16 +78,16 @@ export const bravoSupplierLeadTimes = {
   'SUP003': { avgDays: 2, stdDays: 1, name: 'AzFruit Distribution' },
   'SUP004': { avgDays: 2, stdDays: 1, name: 'Caspian Meat Group' },
   'SUP005': { avgDays: 7, stdDays: 2, name: 'Coca-Cola Azerbaijan' },
-  'SUP006': { avgDays: 2, stdDays: 1, name: 'Azərbaycan Quşçuluq' },
+  'SUP006': { avgDays: 2, stdDays: 1, name: 'Azerbaijan Poultry' },
   'SUP007': { avgDays: 5, stdDays: 2, name: 'Tamam Foods Import' },
   'SUP008': { avgDays: 10, stdDays: 3, name: 'P&G Azerbaijan / Henkel' },
 };
 
 export const bravoMarketRegions = [
-  { id: 'MR001', name: 'Bakı Mərkəz', warehouse: 'WH001', zone: 'A', demandMultiplier: 1.0, stores: 8 },
-  { id: 'MR002', name: 'Yasamal-Binəqədi', warehouse: 'WH001', zone: 'B', demandMultiplier: 0.60, stores: 5 },
-  { id: 'MR003', name: 'Xətai-Nizami', warehouse: 'WH001', zone: 'C', demandMultiplier: 0.50, stores: 4 },
-  { id: 'MR004', name: 'Sabunçu-Suraxanı', warehouse: 'WH002', zone: 'D', demandMultiplier: 0.57, stores: 6 },
-  { id: 'MR005', name: 'Abşeron', warehouse: 'WH002', zone: 'E', demandMultiplier: 0.33, stores: 3 },
-  { id: 'MR006', name: 'Sumqayıt', warehouse: 'WH003', zone: 'F', demandMultiplier: 0.33, stores: 3 },
+  { id: 'MR001', name: 'Baku Central', warehouse: 'WH001', zone: 'A', demandMultiplier: 1.0, stores: 8 },
+  { id: 'MR002', name: 'Yasamal-Binagadi', warehouse: 'WH001', zone: 'B', demandMultiplier: 0.60, stores: 5 },
+  { id: 'MR003', name: 'Khatai-Nizami', warehouse: 'WH001', zone: 'C', demandMultiplier: 0.50, stores: 4 },
+  { id: 'MR004', name: 'Sabunchu-Surakhani', warehouse: 'WH002', zone: 'D', demandMultiplier: 0.57, stores: 6 },
+  { id: 'MR005', name: 'Absheron', warehouse: 'WH002', zone: 'E', demandMultiplier: 0.33, stores: 3 },
+  { id: 'MR006', name: 'Sumgait', warehouse: 'WH003', zone: 'F', demandMultiplier: 0.33, stores: 3 },
 ];
